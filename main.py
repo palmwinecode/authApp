@@ -1,5 +1,9 @@
+import pathlib
+
 import tkinter as tk
+
 from tkinter import messagebox
+
 from PIL import ImageTk
 
 class Login:
@@ -9,7 +13,13 @@ class Login:
         self.root = root
         
         # Background image
-        self.bg = ImageTk.PhotoImage(file="C:/Users/njomj/Documents/Python Projects/Images/background.jpg")
+        # Dynamically determine image path
+        img_file_name = "background.jpg"
+        current_dir = pathlib.Path(__file__).parent.resolve()
+        img_path = current_dir.joinpath(img_file_name)
+
+        # Add background image to window
+        self.bg = ImageTk.PhotoImage(file=img_path)
         self.bg_image = tk.Label(self.root, image=self.bg).place(x=0, y=0, relwidth=1, relheight=1)
 
         # Login Frame
@@ -17,7 +27,7 @@ class Login:
         login_frame.place(x=300, y=150, width=500, height=400)
 
         # Title and subtitle
-        title = tk.Label(login_frame, text="Login Here", font=("Impact", 35, "bold"), fg="#6162FF", bg="white").place(x=90, y=30)
+        title = tk.Label(login_frame, text="Login", font=("Impact", 35, "bold"), fg="#6162FF", bg="white").place(x=90, y=30)
         subtitle = tk.Label(login_frame, text="Members Login Area", font=("Goudy old style", 15, "bold"), fg="#1d1d1d", bg="white").place(x=90, y=100)
         
         # Username
@@ -48,7 +58,7 @@ def main():
     root = tk.Tk()
 
     # Add title to root window
-    root.title("Login System")
+    root.title("Authentication App")
 
     # Set window dimensions
     root.geometry("1199x688")
